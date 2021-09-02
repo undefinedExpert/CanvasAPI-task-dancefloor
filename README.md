@@ -14,7 +14,7 @@ Basic UI mockup:
 - UI must be written in React
 - Typescript is required
 - Remember about mobile UI
-- Plaese use pure CanvasAPI without additional libs
+- PLease use pure CanvasAPI without additional libs
 - The flow of app initialization and view rendering should be as follow: 
     - Loader screen (App boostraping)
     - Fetching state (simulate Api call to recreate canvas with config (eg. number of columns and rows, name)
@@ -23,7 +23,7 @@ Basic UI mockup:
 ## Addional options:
   - Change tile color on click event
   - Create dancefloor animation
-  - Create beatutiful UI
+  - Create beautiful UI
  
  GOOD LUCK! :)
   
