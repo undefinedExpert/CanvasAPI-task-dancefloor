@@ -67,10 +67,6 @@ function DanceFloor({ rows, columns }: Props) {
       return;
     }
 
-    if (!canvasRef.current) {
-      return;
-    }
-
     const rect = canvasRef.current.getBoundingClientRect();
     const height = rect.height / rows;
     const width = rect.width / columns;
@@ -79,8 +75,7 @@ function DanceFloor({ rows, columns }: Props) {
     const y = event.clientY - rect.top;
     const column = Math.ceil(x / width);
     const row = Math.ceil(y / height);
-    console.log(column, row);
-
+      
     setGrid((grid) => {
       return grid.map((columns, rowIndex) => columns.map((color, columnIndex) => rowIndex === row - 1 && columnIndex === column -1 ? getRandomColor() : color))
     })
