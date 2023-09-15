@@ -1,8 +1,12 @@
-function LoadingIndicator() {
+type Props = {
+    message?: string
+}
+
+function LoadingIndicator(props: Props) {
     return (
-      <>
-       Loading...
-      </>
+      <div>
+       {props.message || "Loading..."}
+      </div>
     )
   }
   
