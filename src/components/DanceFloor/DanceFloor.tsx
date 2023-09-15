@@ -51,20 +51,22 @@ function DanceFloor({ rows, columns }: Props) {
 
     clear();
 
-    const size = 100; // make smaller based on grid
+    const width = canvas.width / columns;
+    const totalHeight = width * rows;
+    canvas.height = totalHeight;
     
     for(const [rowIndex, row] of grid.entries()) {
       for(const [columnIndex, color] of row.entries()) {
-        drawRect(size * columnIndex, size * rowIndex, size, color);
+        drawRect(width * columnIndex, width * rowIndex, width, color);
       }
     }
-  }, [context, grid])
+  }, [context, grid, rows, columns])
 
 
   return (
     <div className={styles.root}>
       <div className={styles.canvasWrapper}>
-        <Canvas width={100 * columns} height={100 * rows} ref={canvasRef} />
+        <Canvas ref={canvasRef} />
       </div>
     </div>
   )
