@@ -1,12 +1,11 @@
-import styles from './App.module.scss'
-import Canvas from './components/Canvas/Canvas'
+import Root from "./views/root/Root"
 
 function App() {
+  // fetch options
+  
   return (
-    <div className={styles.root}>
-      <h1>Dance floor  mat</h1>
-
-      <Canvas />
+    <div>
+        <Root />
     </div>
   )
 }
