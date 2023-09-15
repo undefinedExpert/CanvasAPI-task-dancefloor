@@ -33,7 +33,7 @@ function DanceFloor({ rows, columns }: Props) {
     canvasRef.current.height = rect.height;
   }, [canvasRef])
 
-  useEffect(() =>{ 
+  useEffect(() => {
     if (!context || !canvasRef.current) {
       return;
     }
@@ -54,19 +54,43 @@ function DanceFloor({ rows, columns }: Props) {
     const width = canvas.width / columns;
     const totalHeight = width * rows;
     canvas.height = totalHeight;
-    
-    for(const [rowIndex, row] of grid.entries()) {
-      for(const [columnIndex, color] of row.entries()) {
+
+    for (const [rowIndex, row] of grid.entries()) {
+      for (const [columnIndex, color] of row.entries()) {
         drawRect(width * columnIndex, width * rowIndex, width, color);
       }
     }
   }, [context, grid, rows, columns])
 
+  const handleColorChange = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!canvasRef.current) {
+      return;
+    }
+
+    if (!canvasRef.current) {
+      return;
+    }
+
+    const rect = canvasRef.current.getBoundingClientRect();
+    const height = rect.height / rows;
+    const width = rect.width / columns;
+    
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const column = Math.ceil(x / width);
+    const row = Math.ceil(y / height);
+    console.log(column, row);
+
+    setGrid((grid) => {
+      return grid.map((columns, rowIndex) => columns.map((color, columnIndex) => rowIndex === row - 1 && columnIndex === column -1 ? getRandomColor() : color))
+    })
+  }
+
 
   return (
     <div className={styles.root}>
       <div className={styles.canvasWrapper}>
-        <Canvas ref={canvasRef} />
+        <Canvas ref={canvasRef} onClick={handleColorChange} />
       </div>
     </div>
   )
