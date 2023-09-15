@@ -1,8 +1,8 @@
 import styles from './styles.module.scss'
-import Canvas from '../../components/Canvas/Canvas'
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
 import { useCanvasSettingsQuery } from '../../services/canvas';
 import { useOptionsQuery } from '../../services/options';
+import DanceFloor from '../../components/DanceFloor/DanceFloor';
 
 function Root() {
   const options = useOptionsQuery();
@@ -11,10 +11,10 @@ function Root() {
 
   if (canvasSettings.isLoading) {
     return (
-        <>
-          {heading}
-          <LoadingIndicator message='Loading canvas...' />
-        </>
+      <>
+        {heading}
+        <LoadingIndicator message='Loading canvas...' />
+      </>
     )
   }
 
@@ -22,12 +22,12 @@ function Root() {
     <div className={styles.root}>
       {heading}
       <div>
-        rows: {canvasSettings.data?.rows} 
+        rows: {canvasSettings.data?.rows}
       </div>
       <div>
-          columns: {canvasSettings.data?.columns} 
+        columns: {canvasSettings.data?.columns}
       </div>
-      <Canvas />
+      <DanceFloor />
     </div>
   )
 }

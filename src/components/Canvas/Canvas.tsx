@@ -1,9 +1,12 @@
-function Canvas() {
+import { forwardRef } from "react"
+import styles from './styles.module.scss';
+
+const Canvas = forwardRef<HTMLCanvasElement, React.HTMLProps<HTMLButtonElement>>(function Canvas(_, ref) {
   return (
-    <>
-     canvas
-    </>
-  )
-}
+    <div className={styles.root} >
+      <canvas className={styles.canvas} ref={ref} />
+    </div>
+  );
+});
 
 export default Canvas
