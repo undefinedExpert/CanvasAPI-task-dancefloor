@@ -1,17 +1,27 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Canvas from '../Canvas/Canvas';
 import styles from './styles.module.scss'
 import { useCanvasContext } from '../../hooks/useCanvasContext';
 import { getRandomColor } from '../../common/utils';
+import { Grid } from '../../common/types';
 
 type Props = {
   rows: number;
   columns: number;
 }
 
+const createGrid = ({ rows, columns }: Grid) => {
+  return Array.from({ length: rows }).map(() => Array.from({ length: columns }).map(() => getRandomColor()))
+}
+
 function DanceFloor({ rows, columns }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const context = useCanvasContext(canvasRef)
+  const [grid, setGrid] = useState<string[][]>([]);
+
+  useEffect(() => {
+    setGrid(() => createGrid({ rows, columns }))
+  }, [columns, rows])
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -32,8 +42,8 @@ function DanceFloor({ rows, columns }: Props) {
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    const drawRect = (x: number, y: number, size: number) => {
-      context.fillStyle = getRandomColor();
+    const drawRect = (x: number, y: number, size: number, color: string) => {
+      context.fillStyle = color;
       context.beginPath();
       context.fillRect(x, y, size, size);
       context.stroke();
@@ -41,13 +51,14 @@ function DanceFloor({ rows, columns }: Props) {
 
     clear();
 
-    const size = 100;
-    for (let row = 0; row < rows; row++) {
-      for (let column = 0; column < columns; column++) {
-        drawRect(size * column, size * row, size);
+    const size = 100; // make smaller based on grid
+    
+    for(const [rowIndex, row] of grid.entries()) {
+      for(const [columnIndex, color] of row.entries()) {
+        drawRect(size * columnIndex, size * rowIndex, size, color);
       }
-    } 
-  }, [context, columns, rows])
+    }
+  }, [context, grid])
 
 
   return (

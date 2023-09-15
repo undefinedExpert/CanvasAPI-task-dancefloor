@@ -4,11 +4,7 @@ import { useCanvasSettingsQuery } from '../../services/canvas';
 import { useOptionsQuery } from '../../services/options';
 import DanceFloor from '../../components/DanceFloor/DanceFloor';
 import { useEffect, useState } from 'react';
-
-type Grid = {
-  columns: number;
-  rows: number;
-}
+import { Grid } from '../../common/types';
 
 function Root() {
   const options = useOptionsQuery();
