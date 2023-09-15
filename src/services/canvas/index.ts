@@ -10,7 +10,7 @@ const getCanvasSettings = async(): Promise<CanvasSettings> => {
     await delay(150);
     return {
         rows: 2,
-        columns: 2,
+        columns: 4,
     }
 }
 

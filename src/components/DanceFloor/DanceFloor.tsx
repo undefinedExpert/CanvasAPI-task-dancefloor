@@ -52,10 +52,8 @@ function DanceFloor({ rows, columns }: Props) {
 
   return (
     <div className={styles.root}>
-      {rows}
-      {columns}
       <div className={styles.canvasWrapper}>
-        <Canvas width={50} height={50} ref={canvasRef} />
+        <Canvas width={100 * columns} height={100 * rows} ref={canvasRef} />
       </div>
     </div>
   )
