@@ -6,6 +6,7 @@ import React from "react"
 import BootstrapProvider from "./components/BootstrapProvider/BootstrapProvider"
 
 function App() {
+  // TODO: Error handler
   return (
     <React.Suspense fallback={<LoadingIndicator />}>
       <QueryClientProvider client={queryClient}>

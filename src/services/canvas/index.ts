@@ -7,7 +7,7 @@ export type CanvasSettings = {
 }
 
 const getCanvasSettings = async(): Promise<CanvasSettings> => {
-    await delay(2000);
+    await delay(150);
     return {
         rows: 2,
         columns: 2,

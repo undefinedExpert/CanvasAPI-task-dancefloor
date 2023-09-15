@@ -1,0 +1,8 @@
+.root {
+  .canvasWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    min-height: 200px;
+  }
+}

@@ -1,17 +1,62 @@
 import { useEffect, useRef } from 'react'
 import Canvas from '../Canvas/Canvas';
+import styles from './styles.module.scss'
+import { useCanvasContext } from '../../hooks/useCanvasContext';
+import { getRandomColor } from '../../common/utils';
 
-function DanceFloor() {
+type Props = {
+  rows: number;
+  columns: number;
+}
+
+function DanceFloor({ rows, columns }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const context = useCanvasContext(canvasRef)
+
+  useEffect(() => {
+    if (!canvasRef.current) {
+      return;
+    }
+
+    const rect = canvasRef.current.getBoundingClientRect();
+    canvasRef.current.width = rect.width;
+    canvasRef.current.height = rect.height;
+  }, [canvasRef])
 
   useEffect(() =>{ 
-    // render canvas rects
-  }, [canvasRef])
+    if (!context || !canvasRef.current) {
+      return;
+    }
+    const canvas = canvasRef.current;
+    const clear = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    const drawRect = (x: number, y: number, size: number) => {
+      context.fillStyle = getRandomColor();
+      context.beginPath();
+      context.fillRect(x, y, size, size);
+      context.stroke();
+    }
+
+    clear();
+
+    const size = 100;
+    for (let row = 0; row < rows; row++) {
+      for (let column = 0; column < columns; column++) {
+        drawRect(size * column, size * row, size);
+      }
+    } 
+  }, [context, columns, rows])
 
 
   return (
-    <div>
-      <Canvas ref={canvasRef} />
+    <div className={styles.root}>
+      {rows}
+      {columns}
+      <div className={styles.canvasWrapper}>
+        <Canvas width={50} height={50} ref={canvasRef} />
+      </div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ export type Options = {
 }
 
 const getOptions = async(): Promise<Options> => {
-    await delay(2000);
+    await delay(150);
     return {
         user: {
             name: "some user",

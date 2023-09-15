@@ -18,16 +18,14 @@ function Root() {
     )
   }
 
+  if  (!canvasSettings.data) {
+    throw new Error("Oops, something went wrong while loading canvas.");
+  }
+
   return (
     <div className={styles.root}>
       {heading}
-      <div>
-        rows: {canvasSettings.data?.rows}
-      </div>
-      <div>
-        columns: {canvasSettings.data?.columns}
-      </div>
-      <DanceFloor />
+      <DanceFloor columns={canvasSettings.data.columns} rows={canvasSettings.data.rows} />
     </div>
   )
 }
